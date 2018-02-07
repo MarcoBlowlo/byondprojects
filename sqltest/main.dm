@@ -1,18 +1,33 @@
-/*
-	These are simple defaults for your project.
- */
-
 world
-	fps = 25		// 25 frames per second
-	icon_size = 32	// 32x32 icon size by default
-
-	view = 6		// show up to 6 tiles outward from center (13x13 view)
+	name = "SQL Test"
+	mob = /player
 
 
-// Make objects move 8 pixels per tick when walking
 
-mob
-	step_size = 8
+player
+	parent_type = /mob
+	var
+		dbhandle/sql = new/dbhandler
+	verb
 
-obj
-	step_size = 8
+
+dbhandler
+	var
+		database/db
+		database/query/qry
+	proc
+		use(dbname as text)
+			del db
+			db = new(dbname+".db")
+		exec()
+			if(!qry.Execute(db))
+				world << qry.ErrorMsg
+				return false
+			return true
+		query(q as text)
+			qry.Add(q)
+		fetch()
+			var/list/rows = list()
+			while(qry.NextRow())
+				rows += qry.GetRowData()
+			return rows
