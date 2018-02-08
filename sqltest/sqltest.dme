@@ -2,6 +2,8 @@
 // All manual changes should be made outside the BEGIN_ and END_ blocks.
 // New source code should be placed in .dm files: choose File/New --> Code File.
 
+#define DEFAULT_DB "database"
+
 // BEGIN_INTERNALS
 // END_INTERNALS
 
@@ -13,6 +15,9 @@
 // END_PREFERENCES
 
 // BEGIN_INCLUDE
+#include "dbhandler.dm"
+#include "initdb.dm"
 #include "main.dm"
+#include "models.dm"
+#include "player.dm"
 // END_INCLUDE
-
